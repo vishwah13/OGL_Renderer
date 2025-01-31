@@ -59,5 +59,14 @@
     <None Include="shaders\texture.fs">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="shaders\lighting.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\lighting.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\lightSource.fs">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

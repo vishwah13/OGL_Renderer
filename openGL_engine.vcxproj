@@ -147,6 +147,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="shaders\lighting.fs" />
+    <None Include="shaders\lighting.vs" />
+    <None Include="shaders\lightSource.fs" />
     <None Include="shaders\shader.fs" />
     <None Include="shaders\shader.vs" />
     <None Include="shaders\texture.fs" />
