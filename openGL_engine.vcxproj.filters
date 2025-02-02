@@ -46,26 +46,26 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="shaders\shader.vs">
+    <None Include="shaders\shader.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="shaders\shader.fs">
+    <None Include="shaders\shader.frag">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="packages.config" />
-    <None Include="shaders\texture.vs">
+    <None Include="shaders\texture.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="shaders\texture.fs">
+    <None Include="shaders\texture.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="shaders\lighting.vs">
+    <None Include="shaders\lighting.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="shaders\lighting.fs">
+    <None Include="shaders\lighting.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="shaders\lightSource.fs">
+    <None Include="shaders\lightSource.frag">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
