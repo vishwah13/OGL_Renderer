@@ -194,7 +194,7 @@ int main()
             modelShader.use();
             string number = to_string(i);
 
-            modelShader.setVec3("pointLights[" + number + "].position", pointLightPositions[0]);
+            modelShader.setVec3("pointLights[" + number + "].position", pointLightPositions[i]);
             modelShader.setVec3("pointLights[" + number + "].ambient", ambientColor);
             modelShader.setVec3("pointLights[" + number + "].diffuse", diffuseColor);
             modelShader.setVec3("pointLights[" + number + "].specular", 1.0f, 1.0f, 1.0f);
