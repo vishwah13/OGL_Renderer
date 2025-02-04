@@ -2,13 +2,15 @@
 #define NR_POINT_LIGHTS 4
 out vec4 FragColor;
 
-in vec3 Normal;
+//in vec3 Normal;
 in vec2 TexCoords;
 in vec3 FragPos;
+in mat3 TBN;
 
 struct Material {
    sampler2D texture_diffuse1;
    sampler2D texture_specular1;
+   sampler2D texture_normal1;
    sampler2D texture_emission1;
    float texture_shininess1;
 }; 
@@ -122,7 +124,10 @@ vec3 CalcSpotLight(SpotLight light,vec3 normal, vec3 fragPos, vec3 viewDir){
 void main()
 {
    // properties
-    vec3 norm = normalize(Normal);
+    //vec3 norm = normalize(Normal);
+    vec3 norm = texture(material.texture_normal1, TexCoords).rgb;
+    norm = normalize(norm * 2.0 - 1.0);
+    norm = normalize(TBN * norm);
     vec3 viewDir = normalize(viewPos - FragPos);
 
     // phase 1: Directional lighting
