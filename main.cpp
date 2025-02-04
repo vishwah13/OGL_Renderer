@@ -93,11 +93,6 @@ int main()
     glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
     std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
   
-   
-
-    //Shader shader("shaders/texture.vs", "shaders/texture.fs");
-    //Shader lightingShader("shaders/lighting.vert", "shaders/lighting.frag");
-    //Shader lightCubeShader("shaders/lighting.vert", "shaders/lightSource.frag");
     stbi_set_flip_vertically_on_load(true);
     Shader modelShader("shaders/model_lights.vert", "shaders/model_lights.frag");
     Shader cubeShader("shaders/model.vert", "shaders/lightSource.frag");
@@ -207,18 +202,6 @@ int main()
             modelShader.setFloat("pointLights[" + number + "].linear", 0.09f);
             modelShader.setFloat("pointLights[" + number + "].quadratic", 0.032f);
         }
-
-        // spotLight
-        modelShader.setVec3("spotLight.position", camera.Position);
-        modelShader.setVec3("spotLight.direction", camera.Front);
-        modelShader.setVec3("spotLight.ambient", 0.0f, 0.0f, 0.0f);
-        modelShader.setVec3("spotLight.diffuse", 1.0f, 1.0f, 1.0f);
-        modelShader.setVec3("spotLight.specular", 1.0f, 1.0f, 1.0f);
-        modelShader.setFloat("spotLight.constant", 1.0f);
-        modelShader.setFloat("spotLight.linear", 0.09f);
-        modelShader.setFloat("spotLight.quadratic", 0.032f);
-        modelShader.setFloat("spotLight.cutOff", glm::cos(glm::radians(12.5f)));
-        modelShader.setFloat("spotLight.outerCutOff", glm::cos(glm::radians(17.5f)));
 
         // check and call events and swap the buffers
         glfwSwapBuffers(window);
