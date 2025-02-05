@@ -6,6 +6,9 @@ out vec4 FragColor;
 in vec2 TexCoords;
 in vec3 FragPos;
 in mat3 TBN;
+//out vec3 TangentLightPos;
+//in vec3 TangentViewPos;
+//in vec3 TangentFragPos;
 
 struct Material {
    sampler2D texture_diffuse1;
@@ -60,7 +63,7 @@ uniform vec3 viewPos;
 
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 {
-    vec3 lightDir = normalize(-light.direction);
+    vec3 lightDir =  normalize(-light.direction);
     // diffuse shading
     float diff = max(dot(normal, lightDir), 0.0);
     // specular shading
@@ -75,7 +78,7 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 
 vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 {
-    vec3 lightDir = normalize(light.position - fragPos);
+    vec3 lightDir =  normalize(light.position - fragPos);
     // diffuse shading
     float diff = max(dot(normal, lightDir), 0.0);
     // specular shading
@@ -97,7 +100,7 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 
 vec3 CalcSpotLight(SpotLight light,vec3 normal, vec3 fragPos, vec3 viewDir){
     
-    vec3 lightDir = normalize(light.position - fragPos);
+    vec3 lightDir =  normalize(light.position - fragPos);
     // diffuse shading
     float diff = max(dot(normal, lightDir), 0.0);
     // specular shading
@@ -138,5 +141,6 @@ void main()
     //phase 3: Spot light
     result += CalcSpotLight(spotLight, norm, FragPos, viewDir);    
     
+    //FragColor = vec4(vec3(gl_FragCoord.z), 1.0);
     FragColor = vec4(result, 1.0);
 }

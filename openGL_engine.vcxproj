@@ -155,12 +155,16 @@
     <None Include="shaders\lighting.frag" />
     <None Include="shaders\lighting.vert" />
     <None Include="shaders\lightSource.frag" />
+    <None Include="shaders\mirror.frag" />
+    <None Include="shaders\mirror.vert" />
     <None Include="shaders\model.frag" />
     <None Include="shaders\model.vert" />
     <None Include="shaders\model_lights.frag" />
     <None Include="shaders\model_lights.vert" />
     <None Include="shaders\shader.frag" />
     <None Include="shaders\shader.vert" />
+    <None Include="shaders\skybox.frag" />
+    <None Include="shaders\skybox.vert" />
     <None Include="shaders\texture.frag" />
     <None Include="shaders\texture.vert" />
   </ItemGroup>
