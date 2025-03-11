@@ -4,13 +4,19 @@ out vec4 FragColor;
 in vec2 TexCoords;
 
 uniform sampler2D screenTexture;
+uniform float exposure;
 
 void main()
 {	
+	//gamma correction and HDR(tone mapping)
+	vec3 hdrColor = texture(screenTexture, TexCoords).rgb;
+
+	//exposure tone mapping
+	vec3 mapped = vec3(1.0) - exp(-hdrColor * exposure);
 	//gamma correction
-	vec3 color = texture(screenTexture, TexCoords).rgb;
-	color = pow(color,vec3(1.0/2.2));
-	FragColor = vec4(color,1.0);
+	mapped = pow(mapped,vec3(1.0/2.2));
+
+	FragColor = vec4(mapped,1.0);
 
 
    //FragColor = texture(screenTexture, TexCoords);
