@@ -161,6 +161,8 @@
     <None Include="shaders\model.vert" />
     <None Include="shaders\model_lights.frag" />
     <None Include="shaders\model_lights.vert" />
+    <None Include="shaders\pbr.frag" />
+    <None Include="shaders\pbr.vert" />
     <None Include="shaders\post_processing.frag" />
     <None Include="shaders\post_processing.vert" />
     <None Include="shaders\shader.frag" />

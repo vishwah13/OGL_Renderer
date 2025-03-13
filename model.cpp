@@ -124,6 +124,15 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
     std::vector<Texture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
     textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 
+    std::vector<Texture> mettallicMap = loadMaterialTextures(material, aiTextureType_METALNESS, "texture_metallicMap");
+    textures.insert(textures.end(), mettallicMap.begin(), mettallicMap.end());
+
+    std::vector<Texture> roughnessMap = loadMaterialTextures(material, aiTextureType_DIFFUSE_ROUGHNESS, "texture_roughnessMap");
+    textures.insert(textures.end(), roughnessMap.begin(), roughnessMap.end());
+
+    std::vector<Texture> aoMap = loadMaterialTextures(material, aiTextureType_AMBIENT_OCCLUSION, "texture_aoMap");
+    textures.insert(textures.end(), aoMap.begin(), aoMap.end());
+
     // return a mesh object created from the extracted mesh data
     return Mesh(vertices, indices, textures);
 }

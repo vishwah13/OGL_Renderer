@@ -170,8 +170,10 @@ int main()
     Shader skyboxShader("shaders/skybox.vert","shaders/skybox.frag");
     Shader mirrorShader("shaders/mirror.vert","shaders/mirror.frag");
     Shader screenShader("shaders/post_processing.vert", "shaders/post_processing.frag");
+    Shader pbrShader("shaders/pbr.vert", "shaders/pbr.frag");
 
     Model ourModal("assets/backpack/backpack.obj");
+    Model pbrModal("assets/pbrTest/pbrTest.obj");
     Model cubeModal("assets/cube/cube.obj");
     Model mirrorModal("assets/cube/cube.obj");
 
@@ -247,6 +249,17 @@ int main()
 
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
+    glm::vec3 lightPositions[] = {
+        glm::vec3(0.0f, 0.0f, 10.0f),
+    };
+    glm::vec3 lightColors[] = {
+        glm::vec3(150.0f, 150.0f, 150.0f),
+    };
+
+    int nrRows = 7;
+    int nrColumns = 7;
+    float spacing = 2.5;
+
     while (!glfwWindowShouldClose(window))
     {
         // per-frame time logic
@@ -308,7 +321,44 @@ int main()
         model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
         //model = glm::rotate(model, (float)glfwGetTime() * -2.0f, glm::normalize(glm::vec3(1.0, 0.0, 1.0)));
         modelShader.setMat4("model", model);
-        ourModal.Draw(modelShader);
+        //ourModal.Draw(modelShader);
+
+        pbrShader.use();
+        pbrShader.setMat4("projection", projection);
+        pbrShader.setMat4("view", view);
+        pbrShader.setVec3("camPos", camera.Position);
+
+        for (int row = 0; row < nrRows; ++row)
+        {
+            for (int col = 0; col < nrColumns; ++col)
+            {
+                model = glm::mat4(1.0f);
+                model = glm::translate(model, glm::vec3(
+                    (float)(col - (nrColumns / 2)) * spacing,
+                    (float)(row - (nrRows / 2)) * spacing,
+                    0.0f
+                ));
+                pbrShader.setMat4("model", model);
+                pbrShader.setMat3("normalMatrix", glm::transpose(glm::inverse(glm::mat3(model))));
+                pbrModal.Draw(pbrShader);
+            }
+        }
+        pbrModal.Draw(pbrShader);
+
+        for (unsigned int i = 0; i < sizeof(lightPositions) / sizeof(lightPositions[0]); ++i)
+        {
+            glm::vec3 newPos = lightPositions[i] + glm::vec3(sin(glfwGetTime() * 5.0) * 5.0, 0.0, 0.0);
+            newPos = lightPositions[i];
+            pbrShader.setVec3("lightPositions[" + std::to_string(i) + "]", newPos);
+            pbrShader.setVec3("lightColors[" + std::to_string(i) + "]", lightColors[i]);
+
+            model = glm::mat4(1.0f);
+            model = glm::translate(model, newPos);
+            model = glm::scale(model, glm::vec3(0.5f));
+            pbrShader.setMat4("model", model);
+            pbrShader.setMat3("normalMatrix", glm::transpose(glm::inverse(glm::mat3(model))));
+            pbrModal.Draw(pbrShader);
+        }
 
         cubeShader.use();
         cubeShader.setMat4("projection", projection);

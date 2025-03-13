@@ -15,6 +15,9 @@ struct Material {
    sampler2D texture_specular1;
    sampler2D texture_normal1;
    sampler2D texture_emission1;
+   sampler2D texture_metallicMap1;
+   sampler2D texture_roughnessMap1;
+   sampler2D texture_aoMap1;
    float texture_shininess1;
 }; 
 
